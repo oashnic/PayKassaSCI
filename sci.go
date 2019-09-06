@@ -66,7 +66,7 @@ type GetCryptocurrencyAddressForDepositResponse struct {
 
 // GetCryptocurrencyAddressForDeposit is wrapper sci_create_order_get_data
 // https://paykassa.pro/docs/#api-SCI-sci_create_order_get_data
-func (s *SCI) GetCryptocurrencyAddressForDeposit(orderID, amount, currencyID int, comment string, phone bool, paidCommission string) (GetCryptocurrencyAddressForDepositResponse, error) {
+func (s *SCI) GetCryptocurrencyAddressForDeposit(orderID int, amount float64, currencyID int, comment string, phone bool, paidCommission string) (GetCryptocurrencyAddressForDepositResponse, error) {
 
 	var responseGetCryptocurrency = &GetCryptocurrencyAddressForDepositResponse{}
 
@@ -99,7 +99,7 @@ type GetLinkForDepositResponse struct {
 
 // GetLinkForDeposit is wrapper sci_create_order
 // https://paykassa.pro/docs/#api-SCI-sci_create_order
-func (s *SCI) GetLinkForDeposit(orderID, amount, currencyID int, comment string, phone bool, paidCommission string) (GetLinkForDepositResponse, error) {
+func (s *SCI) GetLinkForDeposit(orderID int, amount float64, currencyID int, comment string, phone bool, paidCommission string) (GetLinkForDepositResponse, error) {
 
 	var responseGetLinkForDeposit = &GetLinkForDepositResponse{}
 
@@ -116,10 +116,10 @@ func (s *SCI) GetLinkForDeposit(orderID, amount, currencyID int, comment string,
 	return *responseGetLinkForDeposit, err
 }
 
-func (s *SCI) getParamPayMap(orderID, amount, currencyID int, comment string, phone bool, paidCommission string) map[string]string {
+func (s *SCI) getParamPayMap(orderID int, amount float64, currencyID int, comment string, phone bool, paidCommission string) map[string]string {
 	var param = s.getParamMap()
 	param["order_id"] = strconv.Itoa(orderID)
-	param["amount"] = strconv.Itoa(amount)
+	param["amount"] = strconv.FormatFloat(amount, 'E', -1, 64)
 	param["currency"] = CurrencyCode(currencyID)
 	param["system"] = strconv.Itoa(currencyID)
 	param["comment"] = comment
