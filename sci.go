@@ -1,15 +1,17 @@
-package PayKassaSCI
+package paykassasci
 
 import (
 	"strconv"
 )
 
+// SCI contains basic settings
 type SCI struct {
 	ID   int
 	Key  string
 	Test bool
 }
 
+// CheckPaymentResponse is wrapper response CheckPayment
 type CheckPaymentResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
@@ -26,6 +28,7 @@ type CheckPaymentResponse struct {
 	} `json:"data"`
 }
 
+// CheckPayment is wrapper sci_confirm_order
 // https://paykassa.pro/docs/#api-SCI-sci_confirm_order
 func (s *SCI) CheckPayment(privateHash string) (CheckPaymentResponse, error) {
 
@@ -45,6 +48,7 @@ func (s *SCI) CheckPayment(privateHash string) (CheckPaymentResponse, error) {
 	return *responseCheckPayment, err
 }
 
+// GetCryptocurrencyAddressForDepositResponse is wrapper response GetCryptocurrencyAddressForDeposit
 type GetCryptocurrencyAddressForDepositResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
@@ -60,6 +64,7 @@ type GetCryptocurrencyAddressForDepositResponse struct {
 	} `json:"data"`
 }
 
+// GetCryptocurrencyAddressForDeposit is wrapper sci_create_order_get_data
 // https://paykassa.pro/docs/#api-SCI-sci_create_order_get_data
 func (s *SCI) GetCryptocurrencyAddressForDeposit(orderID, amount, currencyID int, comment string, phone bool, paidCommission string) (GetCryptocurrencyAddressForDepositResponse, error) {
 
@@ -78,6 +83,7 @@ func (s *SCI) GetCryptocurrencyAddressForDeposit(orderID, amount, currencyID int
 	return *responseGetCryptocurrency, err
 }
 
+// GetLinkForDepositResponse is wrapper response GetLinkForDeposit
 type GetLinkForDepositResponse struct {
 	Error   bool   `json:"error"`
 	Message string `json:"message"`
@@ -91,6 +97,7 @@ type GetLinkForDepositResponse struct {
 	} `json:"data"`
 }
 
+// GetLinkForDeposit is wrapper sci_create_order
 // https://paykassa.pro/docs/#api-SCI-sci_create_order
 func (s *SCI) GetLinkForDeposit(orderID, amount, currencyID int, comment string, phone bool, paidCommission string) (GetLinkForDepositResponse, error) {
 
@@ -131,7 +138,7 @@ func (s *SCI) getParamMap() map[string]string {
 	return param
 }
 
-// Init SCI
+// InitSCI initializes SCI
 func InitSCI(merchantID int, merchantKey string, test bool) SCI {
 	return SCI{
 		ID:   merchantID,

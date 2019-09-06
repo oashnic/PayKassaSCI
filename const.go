@@ -1,9 +1,9 @@
-package PayKassaSCI
+package paykassasci
 
-// SCI version
+// VersionSCI is version sci
 const VersionSCI = "0.4"
 
-// URL
+// PayKassaURL is actual url for request
 const PayKassaURL = "https://paykassa.pro/sci/" + VersionSCI + "/index.php"
 
 // Available func
@@ -56,7 +56,7 @@ var currencyCode = map[int]string{
 	Stellar:         "XLM",
 }
 
-// Get currency code by currency id
+// CurrencyCode returned code by currency id
 func CurrencyCode(id int) string {
 	return currencyCode[id]
 }

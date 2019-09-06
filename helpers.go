@@ -1,4 +1,4 @@
-package PayKassaSCI
+package paykassasci
 
 import (
 	"encoding/json"

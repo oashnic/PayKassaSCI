@@ -18,7 +18,7 @@ Import it with:
 import "github.com/oashnic/PayKassaSCI"
 ```
 
-and use `PayKassaSCI` as the package name inside the code.
+and use `paykassasci` as the package name inside the code.
 
 ## Example
 
